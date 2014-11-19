@@ -7,7 +7,7 @@
 FROM ubuntu
 
 # File Author / Maintainer
-MAINTAINER Muneeb Ali
+MAINTAINER Muneeb Ali (@muneeb)
 
 # Update the repository sources list
 RUN apt-get update
@@ -19,6 +19,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 
 # Update the repository sources list once more
 RUN apt-get update
+RUN apt-get -y upgrade
 
 # Install Apache2
 RUN apt-get install -y apache2
