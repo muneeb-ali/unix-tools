@@ -110,3 +110,12 @@ git pull <path-to-repoA>
 git push -u origin <newbranch>
 ```
 
+## Cleanup Commit History
+
+While doing rapid development sometimes you commit files that turn out to be irrelevant for the project or you figure out a much better way of doing something. To remove old or temporarily files/folders from your commit history you can use [bfg](https://rtyley.github.io/bfg-repo-cleaner/) (which is faster than git filter-branch).
+
+```
+brew install bfg
+bfg --delete-folders <folder_name>
+bfg --delete-files <file_name> # can also use wildcards e.g., *.pyc
+```
