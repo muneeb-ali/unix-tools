@@ -29,7 +29,7 @@ Docker on OS X has a time sync issue that affects namecoind. Run:
 
 > /usr/local/bin/boot2docker ssh sudo ntpclient -s -h pool.ntp.org
 
-To manually sync the clock before running the docker. Also, on OS X the docker is running inside virtualbox which means you will not be able to talk to the resolver on http://localhost. Instead:
+To manually sync the clock before running the docker. Also, on OS X the docker is running inside virtualbox which means you will not be able to talk to the docker on 'localhost'. Instead:
 
 > boot2docker ip
 
