@@ -33,9 +33,6 @@ RUN apt-get install -y --force-yes \
 # Create the default service directory
 RUN git clone https://github.com/namecoin/namecoin.git /srv/namecoin
 
-# Get run script
-RUN git clone https://github.com/muneeb-ali/unix-tools.git /srv/unix-tools
-
 # Compile
 WORKDIR /srv/namecoin/src
 RUN make namecoind
@@ -46,4 +43,4 @@ RUN make namecoind
 EXPOSE 8332
 
 # Set default entry point
-ENTRYPOINT /srv/unix-tools/dockerfiles/namecoind/run.sh
+ENTRYPOINT /srv/namecoin/src/namecoind --daemon
