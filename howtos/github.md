@@ -82,3 +82,40 @@ git merge test
 git push origin master
 
 ```
+
+## Merge Github Repos
+
+When merging two github repos, you probably want to preserve the commit history for both repos. If you want to add repoA as a folder in repoB, you should first rewrite the commit history of repoA.
+
+Script for rewriting commit history of a repo where all files move to a subfolder and all commit history is updated.
+
+```
+#!/bin/bash
+#change NEWSUBFOLDER below
+#on OS X replace \t with <tab>
+
+git filter-branch --index-filter \
+  'git ls-files -s | sed "s-\t\"*-&NEWSUBFOLDER/-" |
+   GIT_INDEX_FILE=$GIT_INDEX_FILE.new \
+   git update-index --index-info &&
+   mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"' HEAD
+```
+After this, the merge is as simple as 
+
+```
+cd repoB
+git branch <newbranch>
+git checkout <newbranch>
+git pull <path-to-repoA>
+git push -u origin <newbranch>
+```
+
+## Cleanup Commit History
+
+While doing rapid development sometimes you commit files that turn out to be irrelevant for the project or you figure out a much better way of doing something. To remove old or temporarily files/folders from your commit history you can use [bfg](https://rtyley.github.io/bfg-repo-cleaner/) (which is faster than git filter-branch).
+
+```
+brew install bfg
+bfg --delete-folders <folder_name>
+bfg --delete-files <file_name> # can also use wildcards e.g., *.pyc
+```
