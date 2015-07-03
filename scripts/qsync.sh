@@ -1,0 +1,16 @@
+#quickly sync the local dir with remote AWS server 
+
+DIR=$1
+SERVER=$2
+ 
+if [ -z "$DIR" ]; then
+        echo "Dir required"
+        exit 1;
+fi
+ 
+if [ -z "$SERVER" ]; then
+        echo "Server required"
+        exit 1;
+fi
+
+rsync -bra --delete-excluded -e "ssh -i /Users/muneeb/.ssh/id_rsa.pem" $DIR ubuntu@$SERVER:$DIR
