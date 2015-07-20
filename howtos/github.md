@@ -81,6 +81,11 @@ git pull origin master
 git merge test
 git push origin master
 
+#git tags
+git tag
+git tag -a v1.4 -m 'my version 1.4'
+git show v1.4
+git tag -a v1.2 <old commit checksum>
 ```
 
 ## Merge Github Repos
