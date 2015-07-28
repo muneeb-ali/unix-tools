@@ -86,6 +86,9 @@ git tag
 git tag -a v1.4 -m 'my version 1.4'
 git show v1.4
 git tag -a v1.2 <old commit checksum>
+git push origin v1.2 (push tag to remote)
+git tag -d v1.2 (delete tag)
+git push origin :refs/tags/v1.2
 ```
 
 ## Merge Github Repos
