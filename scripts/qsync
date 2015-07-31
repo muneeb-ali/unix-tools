@@ -1,4 +1,4 @@
-#quickly sync the local dir with remote AWS server 
+#quickly sync the local dir with remote server 
 
 DIR=$1
 SERVER=$2

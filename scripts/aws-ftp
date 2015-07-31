@@ -1,0 +1,9 @@
+#!/bin/bash 
+# shortcut for ftp to AWS servers with .pem file
+
+if [ $1 = 'named1' ]
+then
+	sftp -i ~/.ssh/id_rsa.pem admin@$1
+else
+	sftp -i ~/.ssh/id_rsa.pem ubuntu@$1
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash 
+# shortcut for logging into AWS server with .pem files
+
+if [ $1 = 'named1' ]
+then
+	ssh -i ~/.ssh/id_rsa.pem admin@$1
+else
+	ssh -i ~/.ssh/id_rsa.pem ubuntu@$1
+fi

@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+# Author: Muneeb Ali | http://muneeb.org
+# Fix permissions of files and folders, recursively
+# Example use: chmod_all 600 py will chmod all *.py files recursively
+# Example use: chmod_all 755 dir will chmod all directories recursively
+
+import os
+import sys
+import glob
+
+
+def chmod_all(permission, input_type):
+    dir = os.getcwd()
+    files = []
+    file_type = "*." + input_type
+
+    # need octal (so 8), of 0644 (and not 644)
+    py_permission = int('0' + permission, 8)
+
+    for root, dirs, files in os.walk(dir):
+
+        os.chdir(root)
+        temp_files = glob.glob(file_type)
+
+        if(input_type == "dir"):
+            print "chmod " + permission + ' ' + root
+            os.chmod(root, py_permission)
+        else:
+            for i in temp_files:
+                print "chmod " + permission + ' ' + i
+                os.chmod(i, py_permission)
+
+        if '.git' in dirs:
+            dirs.remove('.git')
+
+
+def get_subdir(dir):
+    return [name for name in os.listdir(dir)
+            if os.path.isdir(os.path.join(dir, name))]
+
+
+def usage():
+    print 'Usage: {prog} <permission> <dir/py/whatever>'.format(prog=sys.argv[0])
+    return -1
+
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 3:
+        usage()
+    else:
+        chmod_all(sys.argv[1], sys.argv[2])
