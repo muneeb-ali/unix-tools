@@ -1,9 +1,15 @@
 #!/bin/bash
-#change NEWSUBFOLDER below
 #on OS X replace \t with <tab>
 
+NEWFOLDER=$1
+ 
+if [ -z "$NEWFOLDER" ]; then
+        echo "ERROR: New folder name required"
+        exit 1;
+fi
+
 git filter-branch --index-filter \
-  'git ls-files -s | sed "s-    \"*-&server/-" |
+  'git ls-files -s | sed "s-    \"*-&$NEWFOLDER/-" |
    GIT_INDEX_FILE=$GIT_INDEX_FILE.new \
    git update-index --index-info &&
    mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"' HEAD
