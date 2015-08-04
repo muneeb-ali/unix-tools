@@ -108,7 +108,7 @@ git filter-branch --index-filter \
    git update-index --index-info &&
    mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"' HEAD
 ```
-After this, the merge is as simple as 
+The above script is available [here](https://github.com/muneeb-ali/unix-tools/blob/master/scripts/git_rewrite). After this, the merge is as simple as 
 
 ```
 cd repoB
