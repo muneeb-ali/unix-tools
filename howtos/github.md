@@ -127,3 +127,10 @@ brew install bfg
 bfg --delete-folders <folder_name>
 bfg --delete-files <file_name> # can also use wildcards e.g., *.pyc
 ```
+
+Force push a branch as master (sometimes needed when bfg rewrites commits). Save previous master as old-master. 
+```
+git branch -m master old-master
+git branch -m latest-branch master
+git push -f origin master
+```
