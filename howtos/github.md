@@ -108,7 +108,7 @@ git filter-branch --index-filter \
    git update-index --index-info &&
    mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"' HEAD
 ```
-After this, the merge is as simple as 
+The above script is available [here](https://github.com/muneeb-ali/unix-tools/blob/master/scripts/git_rewrite). After this, the merge is as simple as 
 
 ```
 cd repoB
@@ -126,4 +126,11 @@ While doing rapid development sometimes you commit files that turn out to be irr
 brew install bfg
 bfg --delete-folders <folder_name>
 bfg --delete-files <file_name> # can also use wildcards e.g., *.pyc
+```
+
+Force push a branch as master (sometimes needed when bfg rewrites commits). Save previous master as old-master. 
+```
+git branch -m master old-master
+git branch -m latest-branch master
+git push -f origin master
 ```
