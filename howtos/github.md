@@ -50,6 +50,7 @@ git checkout temp (now checkout this version)
 git checkout master (now switch to the master version)
 git merge  
 git branch -d <branch_name> #delete branch
+git checkout -b newbranch sourcebranch #create a branch from another branch
 
 #git pull requests (for contributing to other projects)
 git remote add --track master upstream git://github.com/upstreamname/projectname.git
