@@ -1,0 +1,32 @@
+#!/usr/bin/python
+# Author: Jude Nelson
+
+import json
+import pprint
+import sys
+
+pp = pprint.PrettyPrinter()
+
+for path in sys.argv[1:]:
+
+    data = None
+    try:
+        with open(path, "r") as f:
+            data_str = f.read()
+            data = json.loads(data_str)
+
+    except OSError, oe:
+        print >> sys.stderr, "Failed to open %s: %s" % (path, oe.strerror)
+        sys.exit(1)
+
+    except Exception, e:
+        print >> sys.stderr, "Failed to parse %s" % path
+        sys.exit(1)
+
+    try:
+        if data is not None:
+            pp.pprint(data)
+
+    except Exception, e:
+        print >> sys.stderr, "Failed to parse %s" % (path)
+        sys.exit(1)
