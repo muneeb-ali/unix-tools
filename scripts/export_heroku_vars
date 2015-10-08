@@ -1,0 +1,46 @@
+#!/usr/bin/python
+# Author: Muneeb Ali
+
+import subprocess
+import sys
+
+FILENAME = '.heroku_vars'
+
+
+def get_shell_output(heroku_app):
+
+    shell_cmd = 'heroku config --app %s' % heroku_app
+
+    cmd = subprocess.Popen(shell_cmd, shell=True, stdout=subprocess.PIPE)
+
+    fout = open(FILENAME, 'w')
+
+    for line in cmd.stdout:
+        if heroku_app in line:
+            continue
+
+        var_list = line.rsplit(': ')
+
+        env_var = var_list[0]
+        var_value = var_list[1].lstrip(" ").rstrip('\n')
+
+        export_cmd = 'export %s="%s"' % (env_var, var_value)
+        fout.write(export_cmd + '\n')
+
+    print 'Heroku variables exported. Next steps:'
+    print '1) source .heroku_vars'
+    print '2) rm -f .heroku_vars'
+
+    fout.close()
+
+
+def usage():
+    print 'Usage: {prog} <heroku_app>'.format(prog=sys.argv[0])
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        usage()
+        exit(0)
+
+    get_shell_output(sys.argv[1])
