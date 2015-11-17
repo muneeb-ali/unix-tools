@@ -1,0 +1,1 @@
+mongod --dbpath=/usr/local/var/log/ --fork --logpath=/usr/local/var/log/mongodb/mongo.log &
