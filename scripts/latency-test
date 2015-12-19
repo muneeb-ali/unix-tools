@@ -1,0 +1,10 @@
+#!/bin/bash
+#check latency of a website
+
+URL=$1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+FILENAME="curl-format.txt"
+FULLPATH="@$DIR/$FILENAME"
+
+curl -w $FULLPATH -o /dev/null -s $URL
